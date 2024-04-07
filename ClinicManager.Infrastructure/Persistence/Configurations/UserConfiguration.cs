@@ -13,11 +13,12 @@ namespace ClinicManager.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(u => u.Id);
+            builder.HasKey(u => u.UserId);
 
             builder.HasOne(u => u.Address)
                 .WithOne(a => a.User)
-                .HasForeignKey<Address>(a => a.UserId);
+                .HasForeignKey<Address>(a => a.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
