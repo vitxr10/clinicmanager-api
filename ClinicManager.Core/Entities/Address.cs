@@ -8,6 +8,10 @@ namespace ClinicManager.Core.Entities
 {
     public class Address
     {
+        public Address()
+        {
+            
+        }
         public Address(int userId, int number, string city, string state, string cEP, string neighborhood)
         {
             UserId = userId;

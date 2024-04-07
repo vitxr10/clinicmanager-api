@@ -1,3 +1,4 @@
+using ClinicManager.Application.Mappers;
 using ClinicManager.Core.Repositories;
 using ClinicManager.Infrastructure.Persistence.Context;
 using ClinicManager.Infrastructure.Persistence.Repositories;
@@ -18,6 +19,9 @@ builder.Services.AddDbContext<ClinicManagerDbContext>(options => options.UseInMe
 // mediatR
 var myHandlers = AppDomain.CurrentDomain.Load("ClinicManager.Application");
 builder.Services.AddMediatR(m => m.RegisterServicesFromAssemblies(myHandlers));
+
+// automapper
+builder.Services.AddAutoMapper(typeof(PatientMapper));
 
 // interfaces
 builder.Services.AddScoped<IUserRepository, UserRepository>();

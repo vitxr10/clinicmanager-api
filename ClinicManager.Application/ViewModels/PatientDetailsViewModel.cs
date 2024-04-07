@@ -11,7 +11,11 @@ namespace ClinicManager.Application.ViewModels
 {
     public class PatientDetailsViewModel
     {
-        public PatientDetailsViewModel(int userId, string firstName, string lastName, string cPF, DateTime birthday, string phone, string email, BloodTypeEnum bloodType, double height, double weight, AddressDTO address, bool active, DateTime createdAt, DateTime? updatedAt)
+        public PatientDetailsViewModel()
+        {
+            
+        }
+        public PatientDetailsViewModel(int userId, string firstName, string lastName, string cPF, DateTime birthday, string phone, string email, BloodTypeEnum bloodType, double height, double weight, bool active, DateTime createdAt, DateTime? updatedAt)
         {
             UserId = userId;
             FirstName = firstName;
@@ -23,7 +27,6 @@ namespace ClinicManager.Application.ViewModels
             BloodType = bloodType;
             Height = height;
             Weight = weight;
-            Address = address;
             Active = active;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
@@ -42,7 +45,7 @@ namespace ClinicManager.Application.ViewModels
         public bool Active { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public AddressDTO Address { get; set; }
+        public AddressDTO AddressDTO { get; set; }
 
     }
 }

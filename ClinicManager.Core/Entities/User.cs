@@ -10,6 +10,11 @@ namespace ClinicManager.Core.Entities
 {
     public class User
     {
+        public User()
+        {
+
+        }
+
         public User(string firstName, string lastName, string cPF, DateTime birthday, string phone, string email, string password, RoleEnum role, BloodTypeEnum bloodType, double height, double weight)
         {
             FirstName = firstName;
