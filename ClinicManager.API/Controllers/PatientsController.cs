@@ -1,10 +1,15 @@
 ﻿using ClinicManager.Application.Commands.CreatePatient;
+using ClinicManager.Application.Commands.DeletePatient;
+using ClinicManager.Application.Commands.UpdatePatient;
+using ClinicManager.Application.Queries.GetAllPatients;
+using ClinicManager.Application.Queries.GetPatientByDocument;
 using ClinicManager.Application.Queries.GetPatientById;
 using ClinicManager.Core.Entities;
 using ClinicManager.Core.Enums;
 using ClinicManager.Core.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ClinicManager.API.Controllers
 {
@@ -19,9 +24,13 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll ()
+        public async Task<IActionResult> GetAll ()
         {
-            return Ok();
+            var query = new GetAllPatientsQuery();
+
+            var patients = await _mediatR.Send(query);
+
+            return Ok(patients);
         }
 
         [HttpGet("{id}")]
@@ -42,9 +51,20 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("document/{document}")]
-        public IActionResult GetByDocument(string document)
+        public async Task<IActionResult> GetByDocument(string document)
         {
-            return Ok();
+            try
+            {
+                var query = new GetPatientByDocumentQuery(document);
+
+                var patient = await _mediatR.Send(query);
+
+                return Ok(patient);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpPost]
@@ -56,15 +76,37 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id)
+        public async Task<IActionResult> Put(int id, UpdatePatientCommand command)
         {
-            return NoContent();
+            try
+            {
+                command.Id = id;
+
+                await _mediatR.Send(command);
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return NoContent();
+            try
+            {
+                var command = new DeletePatientCommand(id);
+
+                await _mediatR.Send(command);
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

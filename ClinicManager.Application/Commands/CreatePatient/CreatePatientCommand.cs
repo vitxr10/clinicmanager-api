@@ -18,7 +18,7 @@ namespace ClinicManager.Application.Commands.CreatePatient
         public string Email { get; set; }
         public string Password { get; set; }
         public string CPF { get; set; }
-        public RoleEnum Role { get; set; }
+        private RoleEnum Role { get; set; } = RoleEnum.Patient;
         public BloodTypeEnum BloodType { get; set; }
         public double Height { get; set; }
         public double Weight { get; set; }

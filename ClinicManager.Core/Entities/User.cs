@@ -44,10 +44,26 @@ namespace ClinicManager.Core.Entities
         public BloodTypeEnum BloodType { get; set; }
         public double Height { get; set; }
         public double Weight { get; set; }
+        public string? Solutions { get; set; }
+        public string? CRM { get; set; }
+        public SpecialtyEnum? Specialty { get; set; }
         public Address Address { get; set; }
         public bool Active { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+
+        public void Delete()
+        {
+            Active = false;
+        }
+
+        public void Update(string phone, string email, double height, double weight)
+        {
+            Phone = phone;
+            Email = email;
+            Height = height;
+            Weight = weight;
+        }
 
     }
 }

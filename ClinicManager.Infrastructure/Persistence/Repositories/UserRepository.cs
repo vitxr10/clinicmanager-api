@@ -1,4 +1,5 @@
 ﻿using ClinicManager.Core.Entities;
+using ClinicManager.Core.Enums;
 using ClinicManager.Core.Repositories;
 using ClinicManager.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,16 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
 
             return user.UserId;
+        }
+
+        public async Task<List<User>> GetAllAsync(RoleEnum role)
+        {
+            return await _dbContext.Users.Where(u => u.Role == role).ToListAsync();
+        }
+
+        public async Task<User> GetByDocumentAsync(string document)
+        {
+            return await _dbContext.Users.Include(u => u.Address).SingleOrDefaultAsync(u => u.CPF == document);
         }
 
         public async Task<User> GetByIdAsync(int id)

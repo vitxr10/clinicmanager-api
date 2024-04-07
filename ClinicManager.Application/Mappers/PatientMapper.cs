@@ -16,6 +16,7 @@ namespace ClinicManager.Application.Mappers
         {
             CreateMap<CreatePatientCommand, User>();
             CreateMap<User, PatientDetailsViewModel>();
+            CreateMap<User, PatientViewModel>();
         }
     }
 }
