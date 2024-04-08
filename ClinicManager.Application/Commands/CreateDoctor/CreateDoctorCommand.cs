@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClinicManager.Application.Commands.CreatePatient
+namespace ClinicManager.Application.Commands.CreateDoctor
 {
-    public class CreatePatientCommand : IRequest<int>
+    public class CreateDoctorCommand : IRequest<int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,10 +18,11 @@ namespace ClinicManager.Application.Commands.CreatePatient
         public string Email { get; set; }
         public string Password { get; set; }
         public string CPF { get; set; }
-        public RoleEnum Role { get; set; } = RoleEnum.Patient;
+        public RoleEnum Role { get; set; } = RoleEnum.Doctor;
+        public string Solutions { get; set; }
+        public string CRM { get; set; }
+        public SpecialtyEnum Specialty { get; set; }
         public BloodTypeEnum BloodType { get; set; }
-        public double Height { get; set; }
-        public double Weight { get; set; }
         public AddressDTO AddressDTO { get; set; }
     }
 }

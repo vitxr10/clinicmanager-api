@@ -12,7 +12,8 @@ namespace ClinicManager.Core.Entities
     {
         public User()
         {
-
+            Active = true;
+            CreatedAt = DateTime.Now;
         }
 
         public User(string firstName, string lastName, string cPF, DateTime birthday, string phone, string email, string password, RoleEnum role, BloodTypeEnum bloodType, double height, double weight)
@@ -42,8 +43,8 @@ namespace ClinicManager.Core.Entities
         public string Password { get; set; }
         public RoleEnum Role { get; set; }
         public BloodTypeEnum BloodType { get; set; }
-        public double Height { get; set; }
-        public double Weight { get; set; }
+        public double? Height { get; set; }
+        public double? Weight { get; set; }
         public string? Solutions { get; set; }
         public string? CRM { get; set; }
         public SpecialtyEnum? Specialty { get; set; }
@@ -63,6 +64,13 @@ namespace ClinicManager.Core.Entities
             Email = email;
             Height = height;
             Weight = weight;
+        }
+
+        public void Update(string phone, string email, string solutions)
+        {
+            Phone = phone;
+            Email = email;
+            Solutions = solutions;
         }
 
     }
