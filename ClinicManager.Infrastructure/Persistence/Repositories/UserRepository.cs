@@ -27,6 +27,11 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
             return user.UserId;
         }
 
+        public async Task<User> GetByLoginAndPasswordAsync(string login, string password)
+        {
+            return await _dbContext.Users.SingleOrDefaultAsync(u => u.CPF == login  && u.Password == password);
+        }
+
         public async Task<List<User>> GetAllAsync(RoleEnum role)
         {
             return await _dbContext.Users.Where(u => u.Role == role).ToListAsync();

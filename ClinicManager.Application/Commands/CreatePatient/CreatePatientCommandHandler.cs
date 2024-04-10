@@ -2,6 +2,7 @@
 using ClinicManager.Core.Entities;
 using ClinicManager.Core.Enums;
 using ClinicManager.Core.Repositories;
+using ClinicManager.Core.Services;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,18 @@ namespace ClinicManager.Application.Commands.CreatePatient
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public CreatePatientCommandHandler(IUserRepository userRepository, IMapper mapper)
+        private readonly IAuthService _authService;
+        public CreatePatientCommandHandler(IUserRepository userRepository, IMapper mapper, IAuthService authService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _authService = authService;
         }
 
         public async Task<int> Handle(CreatePatientCommand request, CancellationToken cancellationToken)
         {
             var patient = _mapper.Map<User>(request);
+            patient.Password = _authService.ComputeSha256Hash(patient.Password);
 
             await _userRepository.CreateAsync(patient);
 

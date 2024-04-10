@@ -11,12 +11,13 @@ using ClinicManager.Application.Queries.GetDoctorById;
 using ClinicManager.Application.Queries.GetPatientByDocument;
 using ClinicManager.Application.Queries.GetPatientById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicManager.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/doctors")]
     [ApiController]
     public class DoctorsController : ControllerBase
     {
@@ -27,6 +28,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Receptionist")]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetAllDoctorsQuery();
@@ -37,6 +39,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Receptionist")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -54,6 +57,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("document/{document}")]
+        [Authorize(Roles = "Receptionist")]
         public async Task<IActionResult> GetByDocument(string document)
         {
             try
@@ -71,6 +75,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Receptionist")]
         public async Task<IActionResult> Post(CreateDoctorCommand command)
         {
             var id = await _mediatR.Send(command);
@@ -80,6 +85,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Receptionist, Doctor")]
         public async Task<IActionResult> Put(int id, UpdateDoctorCommand command)
         {
             try
@@ -97,6 +103,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Receptionist")]
         public async Task<IActionResult> Delete(int id)
         {
             try

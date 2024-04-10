@@ -11,6 +11,7 @@ namespace ClinicManager.Core.Repositories
     public interface IUserRepository
     {
         Task<int> CreateAsync(User user);
+        Task<User> GetByLoginAndPasswordAsync(string login, string password);
         Task<List<User>> GetAllAsync(RoleEnum role);
         Task<User> GetByIdAsync(int id);
         Task<User> GetByDocumentAsync(string document);

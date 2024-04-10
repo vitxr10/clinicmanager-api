@@ -1,19 +1,13 @@
-﻿using ClinicManager.Application.Commands.CreateDoctor;
-using ClinicManager.Application.Commands.CreateService;
-using ClinicManager.Application.Commands.DeleteDoctor;
+﻿using ClinicManager.Application.Commands.CreateService;
 using ClinicManager.Application.Commands.DeleteService;
 using ClinicManager.Application.Commands.FinishService;
 using ClinicManager.Application.Commands.StartService;
-using ClinicManager.Application.Commands.UpdateDoctor;
-using ClinicManager.Application.Queries.GetAllDoctors;
 using ClinicManager.Application.Queries.GetAllDoctorServices;
 using ClinicManager.Application.Queries.GetAllPatientServices;
 using ClinicManager.Application.Queries.GetAllServices;
-using ClinicManager.Application.Queries.GetDoctorByDocument;
-using ClinicManager.Application.Queries.GetDoctorById;
 using ClinicManager.Application.Queries.GetServiceById;
 using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClinicManager.API.Controllers
@@ -29,6 +23,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Receptionist")]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetAllServicesQuery();
@@ -39,6 +34,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Receptionist")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -56,6 +52,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("patients/{id}")]
+        [Authorize(Roles = "Receptionist, Patient")]
         public async Task<IActionResult> GetAllPatientServices(int id)
         {
             var query = new GetAllPatientServicesQuery(id);
@@ -66,6 +63,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("doctors/{id}")]
+        [Authorize(Roles = "Receptionist, Doctor")]
         public async Task<IActionResult> GetAllDoctorServices(int id)
         {
             var query = new GetAllDoctorServicesQuery(id);
@@ -76,6 +74,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Receptionist, Patient")]
         public async Task<IActionResult> Post(CreateServiceCommand command)
         {
             var id = await _mediatR.Send(command);
@@ -84,6 +83,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPut("start/{id}")]
+        [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> Start(int id)
         {
             try
@@ -101,6 +101,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPut("finish/{id}")]
+        [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> Finish(int id)
         {
             try
@@ -118,6 +119,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Receptionist, Patient, Doctor")]
         public async Task<IActionResult> Delete(int id)
         {
             try

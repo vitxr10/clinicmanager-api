@@ -8,6 +8,7 @@ using ClinicManager.Core.Entities;
 using ClinicManager.Core.Enums;
 using ClinicManager.Core.Repositories;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -24,6 +25,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Receptionist")]
         public async Task<IActionResult> GetAll ()
         {
             var query = new GetAllPatientsQuery();
@@ -34,6 +36,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Receptionist, Patient")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -51,6 +54,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("document/{document}")]
+        [Authorize(Roles = "Receptionist, Patient")]
         public async Task<IActionResult> GetByDocument(string document)
         {
             try
@@ -68,6 +72,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Post(CreatePatientCommand command)
         {
             var id = await _mediatR.Send(command);
@@ -76,6 +81,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Receptionist, Patient")]
         public async Task<IActionResult> Put(int id, UpdatePatientCommand command)
         {
             try
@@ -93,6 +99,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Receptionist")]
         public async Task<IActionResult> Delete(int id)
         {
             try
