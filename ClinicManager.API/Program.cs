@@ -1,5 +1,7 @@
 using ClinicManager.Application.Commands.CreatePatient;
 using ClinicManager.Application.Mappers;
+using ClinicManager.Core.Entities;
+using ClinicManager.Core.Enums;
 using ClinicManager.Core.Repositories;
 using ClinicManager.Core.Services;
 using ClinicManager.Infrastructure.Persistence.Context;
@@ -86,6 +88,32 @@ builder.Services
                     (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                 };
             });
+
+var dbContext = builder.Services.AddDbContext<ClinicManagerDbContext>(options => options.UseInMemoryDatabase("Database")).BuildServiceProvider().GetService<ClinicManagerDbContext>();
+
+dbContext.Database.EnsureCreated();
+
+
+// Se o usuário não existir, pré-cadastre-o
+
+    var newUser = new User
+    {
+        FirstName = "recep",
+        LastName = "sionista",
+        CPF = "19328324084",
+        Birthday = DateTime.Now.AddYears(-18),
+        Phone = "11987655678",
+        Email = "vitor@email.com",
+        Password = "0ec1e4da4796ebea025b56a83687054c7e7dfe8da80a3f1507e847e117846869",
+        Role = RoleEnum.Receptionist,
+        BloodType = BloodTypeEnum.ABPositivo,
+        Height = 190,
+        Weight = 80
+    };
+
+    dbContext.Users.Add(newUser);
+    dbContext.SaveChanges();
+
 
 var app = builder.Build();
 
