@@ -1,9 +1,11 @@
+using ClinicManager.Application.Commands.CreatePatient;
 using ClinicManager.Application.Mappers;
 using ClinicManager.Core.Repositories;
 using ClinicManager.Core.Services;
 using ClinicManager.Infrastructure.Persistence.Context;
 using ClinicManager.Infrastructure.Persistence.Repositories;
 using ClinicManager.Infrastructure.Services;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -14,7 +16,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreatePatientCommand>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -24,6 +27,8 @@ builder.Services.AddDbContext<ClinicManagerDbContext>(options => options.UseInMe
 // mediatR
 var myHandlers = AppDomain.CurrentDomain.Load("ClinicManager.Application");
 builder.Services.AddMediatR(m => m.RegisterServicesFromAssemblies(myHandlers));
+
+// fluentValidation
 
 // automapper
 builder.Services.AddAutoMapper(typeof(PatientMapper));
@@ -36,7 +41,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 // auth
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "DevFreela.API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClinicManager.API", Version = "v1" });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
