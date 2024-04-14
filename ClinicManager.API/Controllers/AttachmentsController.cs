@@ -18,7 +18,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPost("prescription")]
-        public async Task<IActionResult> Post(CreatePrescriptionAttachmentCommand command)
+        public async Task<IActionResult> Post(CreatePrescriptionCommand command)
         {
             try
             {
@@ -27,6 +27,54 @@ namespace ClinicManager.API.Controllers
                 if (!attachmentSended)
                 {
                     return BadRequest("Não foi possível enviar a receita médica.");
+                }
+
+                return Ok();
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("examrequest")]
+        public async Task<IActionResult> Post(CreateExamRequestCommand command)
+        {
+            try
+            {
+                var attachmentSended = await _mediatR.Send(command);
+
+                if (!attachmentSended)
+                {
+                    return BadRequest("Não foi possível enviar a solicitação de exame.");
+                }
+
+                return Ok();
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("medicalcertificate")]
+        public async Task<IActionResult> Post(CreateMedicalCertificateCommand command)
+        {
+            try
+            {
+                var attachmentSended = await _mediatR.Send(command);
+
+                if (!attachmentSended)
+                {
+                    return BadRequest("Não foi possível enviar a solicitação de exame.");
                 }
 
                 return Ok();

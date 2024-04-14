@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClinicManager.Application.Commands.Attachments
 {
-    public class CreatePrescriptionAttachmentCommand : IRequest<bool>
+    public class CreateExamRequestCommand : IRequest<bool>
     {
         public int PatientId { get; set; }
         public int DoctorId { get; set; }
