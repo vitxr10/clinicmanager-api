@@ -28,6 +28,8 @@ namespace ClinicManager.Application.Commands.CreatePatient
         public async Task<int> Handle(CreatePatientCommand request, CancellationToken cancellationToken)
         {
             var patient = _mapper.Map<User>(request);
+
+            patient.Role = RoleEnum.Patient;
             patient.Password = _authService.ComputeSha256Hash(patient.Password);
 
             await _userRepository.CreateAsync(patient);

@@ -18,7 +18,6 @@ namespace ClinicManager.Application.Commands.CreateDoctor
         public string Email { get; set; }
         public string Password { get; set; }
         public string CPF { get; set; }
-        public RoleEnum Role { get; set; } = RoleEnum.Doctor;
         public string Solutions { get; set; }
         public string CRM { get; set; }
         public SpecialtyEnum Specialty { get; set; }

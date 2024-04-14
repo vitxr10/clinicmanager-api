@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ClinicManager.Core.Entities;
+using ClinicManager.Core.Enums;
 using ClinicManager.Core.Repositories;
 using ClinicManager.Core.Services;
 using MediatR;
@@ -26,6 +27,8 @@ namespace ClinicManager.Application.Commands.CreateDoctor
         public async Task<int> Handle(CreateDoctorCommand request, CancellationToken cancellationToken)
         {
             var doctor = _mapper.Map<User>(request);
+
+            doctor.Role = RoleEnum.Doctor;
             doctor.Password = _authService.ComputeSha256Hash(doctor.Password);
 
             await _userRepository.CreateAsync(doctor);

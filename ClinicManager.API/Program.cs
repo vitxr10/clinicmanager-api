@@ -1,5 +1,6 @@
 using ClinicManager.Application.Commands.CreatePatient;
 using ClinicManager.Application.Mappers;
+using ClinicManager.Application.Services;
 using ClinicManager.Core.Entities;
 using ClinicManager.Core.Enums;
 using ClinicManager.Core.Repositories;
@@ -39,6 +40,8 @@ builder.Services.AddAutoMapper(typeof(PatientMapper));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IPdfService, PdfService>();
 
 // auth
 builder.Services.AddSwaggerGen(c =>
