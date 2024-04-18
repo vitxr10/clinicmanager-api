@@ -482,3 +482,7 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Google Calendar Configurations
+calendarcredential.json
+CalendarAuthToken

@@ -42,6 +42,7 @@ builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IPdfService, PdfService>();
+builder.Services.AddScoped<ICalendarEventsService, CalendarEventsService>();
 
 // auth
 builder.Services.AddSwaggerGen(c =>
