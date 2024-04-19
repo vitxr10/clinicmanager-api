@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ClinicManager.Infrastructure.Migrations
+namespace ClinicManager.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ClinicManagerDbContext))]
     [Migration("20240418234809_FirstMigration")]
