@@ -1,6 +1,7 @@
 ﻿using ClinicManager.Application.Commands.Attachments;
 using ClinicManager.Application.Commands.CreatePatient;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
@@ -9,6 +10,7 @@ namespace ClinicManager.API.Controllers
 {
     [Route("api/attachments")]
     [ApiController]
+    [Authorize(Roles = "Doctor")]
     public class AttachmentsController : ControllerBase
     {
         private readonly IMediator _mediatR;

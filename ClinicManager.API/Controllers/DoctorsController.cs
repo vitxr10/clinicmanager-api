@@ -28,7 +28,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Receptionist")]
+        [Authorize(Roles = "Receptionist, Patient")]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetAllDoctorsQuery();
@@ -39,7 +39,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Receptionist")]
+        [Authorize(Roles = "Receptionist, Patient, Doctor")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -57,7 +57,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("document/{document}")]
-        [Authorize(Roles = "Receptionist")]
+        [Authorize(Roles = "Receptionist, Doctor")]
         public async Task<IActionResult> GetByDocument(string document)
         {
             try

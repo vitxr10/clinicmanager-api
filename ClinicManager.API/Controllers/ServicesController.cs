@@ -34,7 +34,7 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Receptionist")]
+        [Authorize(Roles = "Receptionist, Doctor, Patient")]
         public async Task<IActionResult> GetById(int id)
         {
             try

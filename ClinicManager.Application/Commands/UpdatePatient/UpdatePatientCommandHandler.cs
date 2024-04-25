@@ -1,4 +1,5 @@
-﻿using ClinicManager.Core.Repositories;
+﻿using ClinicManager.Core.Entities;
+using ClinicManager.Core.Repositories;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,9 @@ namespace ClinicManager.Application.Commands.UpdatePatient
             if (patient == null)
                 throw new Exception("Paciente não encontrado.");
 
-            patient.Update(request.Phone, request.Email, request.Height, request.Weight);
+            var address = request.AddressDTO;
+
+            patient.Update(request.Phone, request.Email, request.Height, request.Weight, address.Number, address.City, address.State, address.CEP, address.Neighborhood);
 
             await _userRepository.SaveAsync();
         }

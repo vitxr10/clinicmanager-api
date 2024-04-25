@@ -1,4 +1,5 @@
-﻿using ClinicManager.Core.Enums;
+﻿using ClinicManager.Application.DTOs;
+using ClinicManager.Core.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace ClinicManager.Application.Commands.UpdatePatient
         public string Email { get; set; }
         public double Height { get; set; }
         public double Weight { get; set; }
+        public AddressDTO AddressDTO { get; set; }
     }
 }

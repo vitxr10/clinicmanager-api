@@ -1,6 +1,8 @@
 ﻿using ClinicManager.Application.Commands.CreatePatient;
 using ClinicManager.Application.Mappers;
 using ClinicManager.Application.Services;
+using ClinicManager.Core.Entities;
+using ClinicManager.Core.Enums;
 using ClinicManager.Core.Repositories;
 using ClinicManager.Core.Services;
 using ClinicManager.Infrastructure.Persistence.Context;
