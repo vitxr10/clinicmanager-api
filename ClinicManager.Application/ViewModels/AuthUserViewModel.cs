@@ -8,13 +8,15 @@ namespace ClinicManager.Application.ViewModels
 {
     public class AuthUserViewModel
     {
-        public AuthUserViewModel(string login, string token)
+        public AuthUserViewModel(string login, string role, string token)
         {
             Login = login;
+            Role = role;
             Token = token;
         }
 
         public string Login { get; set; }
+        public string Role { get; set; }
         public string Token { get; set; }
     }
 }

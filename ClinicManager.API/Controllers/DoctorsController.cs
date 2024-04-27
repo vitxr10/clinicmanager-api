@@ -8,8 +8,10 @@ using ClinicManager.Application.Queries.GetAllDoctors;
 using ClinicManager.Application.Queries.GetAllPatients;
 using ClinicManager.Application.Queries.GetDoctorByDocument;
 using ClinicManager.Application.Queries.GetDoctorById;
+using ClinicManager.Application.Queries.GetDoctorsBySpecialty;
 using ClinicManager.Application.Queries.GetPatientByDocument;
 using ClinicManager.Application.Queries.GetPatientById;
+using ClinicManager.Core.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -72,6 +74,17 @@ namespace ClinicManager.API.Controllers
             {
                 return NotFound(ex.Message);
             }
+        }
+
+        [HttpGet("specialty/{specialty}")]
+        [Authorize(Roles = "Receptionist, Patient")]
+        public async Task<IActionResult> GetBySpecialty(SpecialtyEnum specialty)
+        {
+            var query = new GetDoctorsBySpecialtyQuery(specialty);
+
+            var doctors = await _mediatR.Send(query);
+
+            return Ok(doctors);
         }
 
         [HttpPost]

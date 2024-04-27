@@ -15,6 +15,7 @@ namespace ClinicManager.Core.Repositories
         Task<List<User>> GetAllAsync(RoleEnum role);
         Task<User> GetByIdAsync(int id);
         Task<User> GetByDocumentAsync(string document);
+        Task<List<User>> GetDoctorsBySpecialtyAsync(SpecialtyEnum specialty);
         Task SaveAsync();
     }
 }

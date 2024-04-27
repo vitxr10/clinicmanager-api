@@ -57,7 +57,7 @@ namespace ClinicManager.Infrastructure.Services
                 (
                     issuer: issuer,
                     audience: audience,
-                    expires: DateTime.Now.AddHours(2),
+                    expires: DateTime.Now.AddHours(6),
                     signingCredentials: credentials,
                     claims: claims
                 );

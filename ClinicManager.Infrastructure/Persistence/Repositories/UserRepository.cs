@@ -51,5 +51,10 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
         {
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<List<User>> GetDoctorsBySpecialtyAsync(SpecialtyEnum specialty)
+        {
+            return await _dbContext.Users.Where(d => d.Specialty == specialty).ToListAsync();
+        }
     }
 }
