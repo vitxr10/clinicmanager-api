@@ -1,5 +1,6 @@
 ﻿using ClinicManager.Core.Entities;
 using ClinicManager.Core.Repositories;
+using Google.Apis.Util;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -25,9 +26,11 @@ namespace ClinicManager.Application.Commands.UpdatePatient
             if (patient == null)
                 throw new Exception("Paciente não encontrado.");
 
-            var address = request.AddressDTO;
+            patient.Update(request.Phone, request.Email, request.Height, request.Weight);
 
-            patient.Update(request.Phone, request.Email, request.Height, request.Weight, address.Number, address.City, address.State, address.CEP, address.Neighborhood);
+            var address = request.AddressDTO;
+            patient.Address.Update(address.Number, address.City, address.State, address.CEP, address.Neighborhood);
+
 
             await _userRepository.SaveAsync();
         }

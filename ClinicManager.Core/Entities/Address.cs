@@ -30,5 +30,14 @@ namespace ClinicManager.Core.Entities
         public string CEP { get; set; }
         public string Neighborhood { get; set; }
         public User User { get; set; }
+
+        public void Update(int number, string city, string state, string cEP, string neighborhood)
+        {
+            Number = number;
+            City = city;
+            State = state;
+            CEP = cEP;
+            Neighborhood = neighborhood;
+        }
     }
 }

@@ -24,9 +24,10 @@ namespace ClinicManager.Application.Commands.UpdateDoctor
             if (doctor == null)
                 throw new Exception("Médico não encontrado.");
 
-            var address = request.AddressDTO;
+            doctor.Update(request.Phone, request.Email, request.Solutions);
 
-            doctor.Update(request.Phone, request.Email, request.Solutions, address.Number, address.City, address.State, address.CEP, address.Neighborhood);
+            var address = request.AddressDTO;
+            doctor.Address.Update(address.Number, address.City, address.State, address.CEP, address.Neighborhood);
 
             await _userRepository.SaveAsync();
         }

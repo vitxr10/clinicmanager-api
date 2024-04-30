@@ -58,29 +58,19 @@ namespace ClinicManager.Core.Entities
             Active = false;
         }
 
-        public void Update(string phone, string email, double height, double weight, int number, string city, string state, string cEP, string neighborhood)
+        public void Update(string phone, string email, double height, double weight)
         {
             Phone = phone;
             Email = email;
             Height = height;
             Weight = weight;
-            Address.Number = number;
-            Address.City = city;
-            Address.State = state;
-            Address.CEP = cEP;
-            Address.Neighborhood = neighborhood;
         }
 
-        public void Update(string phone, string email, string solutions, int number, string city, string state, string cEP, string neighborhood)
+        public void Update(string phone, string email, string solutions)
         {
             Phone = phone;
             Email = email;
             Solutions = solutions;
-            Address.Number = number;
-            Address.City = city;
-            Address.State = state;
-            Address.CEP = cEP;
-            Address.Neighborhood = neighborhood;
         }
 
     }
