@@ -11,5 +11,6 @@ namespace ClinicManager.Application.Queries.GetAllServices
     public class GetAllServicesQuery : IRequest<List<ServiceViewModel>>
     {
 
+        public string? StringQuery { get; set; }
     }
 }

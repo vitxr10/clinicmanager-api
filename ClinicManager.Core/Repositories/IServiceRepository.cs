@@ -9,7 +9,7 @@ namespace ClinicManager.Core.Repositories
 {
     public interface IServiceRepository
     {
-        Task<List<Service>> GetAllAsync();
+        Task<List<Service>> GetAllAsync(string stringQuery);
         Task<Service> GetByIdAsync(int id);
         Task<List<Service>> GetAllPatientServices(int id);
         Task<List<Service>> GetAllDoctorServices(int id);

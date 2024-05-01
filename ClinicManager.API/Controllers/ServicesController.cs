@@ -24,9 +24,10 @@ namespace ClinicManager.API.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Receptionist")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(string? stringQuery)
         {
             var query = new GetAllServicesQuery();
+            query.StringQuery = stringQuery;
 
             var services = await _mediatR.Send(query);
 

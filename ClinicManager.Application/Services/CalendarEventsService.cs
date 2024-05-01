@@ -74,12 +74,24 @@ namespace ClinicManager.Application.Services
                     new EventAttendee { Email = request.PatientEmail },
                     new EventAttendee { Email = request.DoctorEmail },
                 },
-        };
+                ConferenceData = new ConferenceData()
+                {
+                    CreateRequest = new CreateConferenceRequest()
+                    {
+                        ConferenceSolutionKey = new ConferenceSolutionKey()
+                        {
+                            Type = "hangoutsMeet"
+                        },
+                        RequestId = Guid.NewGuid().ToString()
+                    },
+                },
+            };
 
             var eventRequest = services.Events.Insert(eventCalendar, CALENDAR_ID);
-            var requestCreate = await eventRequest.ExecuteAsync();
+            eventRequest.ConferenceDataVersion = 1;
+            var createdEvent = await eventRequest.ExecuteAsync();
 
-            return requestCreate;
+            return createdEvent;
         }
     }
 }

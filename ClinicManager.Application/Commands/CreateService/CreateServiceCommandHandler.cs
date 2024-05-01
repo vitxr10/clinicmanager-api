@@ -61,7 +61,14 @@ namespace ClinicManager.Application.Commands.CreateService
                     service.EndDate
                 );
 
-            await _calendarService.CreateEvent(calendarEvent);
+            var googleEvent = await _calendarService.CreateEvent(calendarEvent);
+
+            if (service.Modality == Core.Enums.ServiceModalityEnum.Telemedicine)
+            {
+                service.MeetingLink = googleEvent.HangoutLink;
+
+                await _serviceRepository.SaveAsync();
+            }
 
             return id;
         }

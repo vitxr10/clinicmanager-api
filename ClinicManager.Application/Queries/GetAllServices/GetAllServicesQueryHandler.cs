@@ -23,7 +23,7 @@ namespace ClinicManager.Application.Queries.GetAllServices
 
         public async Task<List<ServiceViewModel>> Handle(GetAllServicesQuery request, CancellationToken cancellationToken)
         {
-            var services = await _serviceRepository.GetAllAsync();
+            var services = await _serviceRepository.GetAllAsync(request.StringQuery);
 
             var servicesViewModel = _mapper.Map<List<ServiceViewModel>>(services);
 

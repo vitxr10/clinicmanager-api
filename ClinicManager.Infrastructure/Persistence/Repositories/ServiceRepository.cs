@@ -2,6 +2,7 @@
 using ClinicManager.Core.Repositories;
 using ClinicManager.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,8 +42,12 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
             return true;
         }
 
-        public async Task<List<Service>> GetAllAsync()
+        public async Task<List<Service>> GetAllAsync(string stringQuery)
         {
+            //if (!stringQuery.IsNullOrEmpty())
+            //    return await _dbContext.Services.Contains(stringQuery);
+
+
             return await _dbContext.Services.ToListAsync();
         }
 

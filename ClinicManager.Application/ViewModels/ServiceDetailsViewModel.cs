@@ -16,6 +16,7 @@ namespace ClinicManager.Application.ViewModels
         public string Name { get; set; }
         public string PatientName { get; set; }
         public string DoctorName { get; set; }
+        public string? MeetingLink { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public ServiceStatusEnum Status { get; set; }
