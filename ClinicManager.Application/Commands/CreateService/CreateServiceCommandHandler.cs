@@ -30,11 +30,15 @@ namespace ClinicManager.Application.Commands.CreateService
         {
             var patient = await _userRepository.GetByIdAsync(request.PatientId);
             if (patient == null)
-                throw new Exception("Paciente não encontrado.");
+                throw new DirectoryNotFoundException("Paciente não encontrado.");
 
             var doctor = await _userRepository.GetByIdAsync(request.DoctorId);
             if (doctor == null)
-                throw new Exception("Médico não encontrado.");
+                throw new DirectoryNotFoundException("Médico não encontrado.");
+
+            var doctorAvailable = await _serviceRepository.DoctorAvailable(doctor.UserId, request.StartDate);
+            if (!doctorAvailable)
+                throw new Exception("Horário indisponível.");
 
             var service = _mapper.Map<Service>(request);
             var id = await _serviceRepository.CreateAsync(service);
@@ -42,12 +46,9 @@ namespace ClinicManager.Application.Commands.CreateService
             string location;
 
             if (service.Modality == Core.Enums.ServiceModalityEnum.Telemedicine)
-            {
                 location = "Google Meets";
-            }
-
-            location = "Clínica Excelência e Sáude, São Paulo, SP, nº 123";
-
+            else
+                location = "Clínica Excelência e Sáude, São Paulo, SP, nº 123";
 
             var calendarEvent = new CalendarEventDTO
                 (

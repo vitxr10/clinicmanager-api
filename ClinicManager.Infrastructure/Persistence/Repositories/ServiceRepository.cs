@@ -26,6 +26,21 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
             return service.Id;
         }
 
+        public async Task<bool> DoctorAvailable(int id, DateTime startDate)
+        {
+            var endDate = startDate.AddMinutes(30);
+
+            var unavailable = await _dbContext.Services.AnyAsync(s => s.DoctorId == id && startDate >= s.StartDate && startDate <= s.EndDate
+            || endDate >= s.StartDate && endDate <= s.EndDate);
+
+            if (unavailable)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task<List<Service>> GetAllAsync()
         {
             return await _dbContext.Services.ToListAsync();

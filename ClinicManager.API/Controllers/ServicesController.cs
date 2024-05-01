@@ -77,9 +77,20 @@ namespace ClinicManager.API.Controllers
         [Authorize(Roles = "Receptionist, Patient")]
         public async Task<IActionResult> Post(CreateServiceCommand command)
         {
-            var id = await _mediatR.Send(command);
+            try
+            {
+                var id = await _mediatR.Send(command);
 
-            return CreatedAtAction(nameof(GetById), new { id }, command);
+                return CreatedAtAction(nameof(GetById), new { id }, command);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPut("start/{id}")]

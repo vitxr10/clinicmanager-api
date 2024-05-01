@@ -31,7 +31,6 @@ namespace ClinicManager.Application.Commands.UpdatePatient
             var address = request.AddressDTO;
             patient.Address.Update(address.Number, address.City, address.State, address.CEP, address.Neighborhood);
 
-
             await _userRepository.SaveAsync();
         }
     }

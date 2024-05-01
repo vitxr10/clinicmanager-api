@@ -64,6 +64,7 @@ namespace ClinicManager.Core.Entities
             Email = email;
             Height = height;
             Weight = weight;
+            UpdatedAt = DateTime.Now;
         }
 
         public void Update(string phone, string email, string solutions)
@@ -71,6 +72,7 @@ namespace ClinicManager.Core.Entities
             Phone = phone;
             Email = email;
             Solutions = solutions;
+            UpdatedAt = DateTime.Now;
         }
 
     }
