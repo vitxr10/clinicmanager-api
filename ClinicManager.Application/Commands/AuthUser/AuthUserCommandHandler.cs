@@ -26,10 +26,11 @@ namespace ClinicManager.Application.Commands.AuthUser
             var password = _authService.ComputeSha256Hash(request.Password);
 
             var user = await _userRepository.GetByLoginAndPasswordAsync(login, password);
-            var userRole = user.Role.ToString();
 
             if (user == null)
                 throw new Exception("Login e/ou senha incorretos.");
+
+            var userRole = user.Role.ToString();
 
             var token = _authService.GenerateJwtToken(user.CPF, user.Role.ToString());
 

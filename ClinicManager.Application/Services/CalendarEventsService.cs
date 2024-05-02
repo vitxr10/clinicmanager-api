@@ -62,11 +62,11 @@ namespace ClinicManager.Application.Services
                 Location = request.Location,
                 Start = new EventDateTime
                 {
-                    DateTimeDateTimeOffset = request.Start.AddHours(3),
+                    DateTimeDateTimeOffset = request.Start,
                 },
                 End = new EventDateTime
                 {
-                    DateTimeDateTimeOffset = request.End.AddHours(3),
+                    DateTimeDateTimeOffset = request.End,
                 },
                 Description = request.Description,
                 Attendees = new List<EventAttendee>
