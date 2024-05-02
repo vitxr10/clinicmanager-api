@@ -37,7 +37,6 @@ namespace ClinicManager.Application.Services
                 mail.To.Add(toEmail);
                 mail.Subject = subject;
                 mail.Body = body;
-                mail.IsBodyHtml = true;
                 mail.Priority = MailPriority.High;
 
                 using (SmtpClient smtp = new SmtpClient(host, port))

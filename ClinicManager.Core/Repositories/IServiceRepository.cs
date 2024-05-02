@@ -13,6 +13,7 @@ namespace ClinicManager.Core.Repositories
         Task<Service> GetByIdAsync(int id);
         Task<List<Service>> GetAllPatientServices(int id);
         Task<List<Service>> GetAllDoctorServices(int id);
+        Task<List<Service>> GetAllTomorrowServices();
         Task<bool> DoctorAvailable(int id, DateTime startDate);
         Task<int> CreateAsync(Service service);
         Task SaveAsync();

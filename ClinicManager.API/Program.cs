@@ -1,4 +1,5 @@
 using ClinicManager.API.DependencyInjection;
+using ClinicManager.Application.BackgroundServices;
 using ClinicManager.Application.Commands.CreatePatient;
 using ClinicManager.Application.Mappers;
 using ClinicManager.Application.Services;
@@ -22,6 +23,8 @@ builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication()
     .AddPresentation(builder.Configuration);
+
+builder.Services.AddHostedService<ServiceNotificationWorkerService>();
 
 var app = builder.Build();
 

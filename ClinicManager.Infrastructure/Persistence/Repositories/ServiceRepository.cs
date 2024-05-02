@@ -61,6 +61,12 @@ namespace ClinicManager.Infrastructure.Persistence.Repositories
             return await _dbContext.Services.Where(s => s.PatientId == id).ToListAsync();
         }
 
+        public async Task<List<Service>> GetAllTomorrowServices()
+        {
+            var today = DateTime.Now.Date;
+            return await _dbContext.Services.Where(s => s.StartDate.Date == today.AddDays(1)).ToListAsync();
+        }
+
         public async Task<Service> GetByIdAsync(int id)
         {
             return await _dbContext.Services.SingleOrDefaultAsync(s => s.Id == id);
