@@ -1,6 +1,6 @@
-API REST de um sistema de gerenciamento de Clínica Médica.
+# API REST de um sistema de gerenciamento de Clínica Médica.
 
-Funcionalidades do projeto: 
+## Funcionalidades do projeto: 
 - CRUD de médicos, pacientes, e serviços (consulta e exame) 
 - Autenticação e autorização JWT 
 - Registro de agendamento com Google Calendar
@@ -8,7 +8,7 @@ Funcionalidades do projeto:
 - Gerar PDFs de atestado, receita médica e solicitação de exame 
 - Notificação de lembrete para os pacientes um dia antes do seu agendamento via email 
 
-Tecnologias e padrões utilizados: 
+## Tecnologias e padrões utilizados: 
 - Arquitetura limpa 
 - CQRS 
 - Padrão Repository 
