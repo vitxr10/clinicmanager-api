@@ -1,4 +1,4 @@
-# API REST de um sistema de gerenciamento de Clínica Médica.
+# API REST de um sistema de gerenciamento de Clínica Médica
 
 ## Funcionalidades do projeto: 
 - CRUD de médicos, pacientes, e serviços (consulta e exame) 
